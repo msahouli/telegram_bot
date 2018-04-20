@@ -19,6 +19,7 @@ bot.
 
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import logging
+import config
 
 # Enable logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -38,6 +39,10 @@ def help(bot, update):
     """Send a message when the command /help is issued."""
     update.message.reply_text('Help!')
 
+def love(bot, update):
+    """Send a message when the command /loveamount is issued."""
+    update.message.reply_text('Infinity!!!')
+
 
 def echo(bot, update):
     """Echo the user message."""
@@ -53,7 +58,7 @@ def main():
     """Start the bot."""
 
     # Create the EventHandler and pass it your bot's token.
-    updater = Updater(TOKEN)
+    updater = Updater(config.api_token)
 
     # Get the dispatcher to register handlers
     dp = updater.dispatcher
@@ -61,6 +66,7 @@ def main():
     # on different commands - answer in Telegram
     dp.add_handler(CommandHandler("start", start))
     dp.add_handler(CommandHandler("help", help))
+    dp.add_handler(CommandHandler("loveamount", love))
 
     # on noncommand i.e message - echo the message on Telegram
     dp.add_handler(MessageHandler(Filters.text, echo))
